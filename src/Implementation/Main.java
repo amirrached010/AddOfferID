@@ -1,5 +1,5 @@
 /*
-    This is the main class for ConnectRevampV1.
+    This is the main class for AddOfferID.
     the main method is where the execution begins
  */
 package Implementation;
