@@ -28,6 +28,14 @@ public class Globals {
     public static int NUMBER_OF_THREADS;
     
     public static enum UCIPRequest {
-        UpdateOffer,AddPam,GetAccountDetails,ResetFiveAccumulator,GetOffers,RunPam,UpdateOfferWithExpiry
+        UpdateOffer,
+        AddPam,
+        GetAccountDetails,
+        ResetFiveAccumulator,
+        GetOffers,
+        RunPam,
+        UpdateOfferWithExpiry,
+        DeleteOffer,
+        ChangeSC
     }
 }

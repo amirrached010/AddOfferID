@@ -1,0 +1,29 @@
+2016-04-26 14:13:26 DEBUG Main:52 - Starting log file for WatchDirectory Tool - 2016-04-26 14:13:26
+2016-04-26 14:13:26 DEBUG Main:156 - Resource File Path : D:\GitRepository\AddOfferID\Resources\config.properties
+2016-04-26 14:13:26 DEBUG Main:50 - Connect Revamp's Input Folder : D:\GitRepository\AddOfferID\INPUT/Ready/
+2016-04-26 14:13:26 DEBUG Main:66 - Number of files in the Watched folder is : 1
+2016-04-26 14:13:26 DEBUG Main:240 - File archived : D:\GitRepository\AddOfferID\ArchiveLog\ction_20\Corrective_Action_20160425123130.log
+2016-04-26 14:13:26 DEBUG Main:86 - Directory D:\GitRepository\AddOfferID\ArchiveLog\20160426 is created!
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_0_20160426133130.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_0_20160426134729.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_0_20160426135202.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_0_20160426135253.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_1_20160426133130.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_1_20160426134729.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_1_20160426135202.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_1_20160426135253.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_2_20160426133130.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_2_20160426134729.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_2_20160426135202.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_2_20160426135253.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_3_20160426133130.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_3_20160426134729.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_3_20160426135202.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:127 - File ThreadLog_3_20160426135253.log got accumulated and archived in the file : D:\GitRepository\AddOfferID\ArchiveLog/20160426\AddOfferID_AccumulativeLog_2016042614.log
+2016-04-26 14:13:26 DEBUG Main:83 - File being processed : input_add.txt
+2016-04-26 14:13:26 DEBUG Main:261 - Scanner is closing for file : input_add.txt
+2016-04-26 14:13:26 DEBUG Main:285 - Directory D:\GitRepository\AddOfferID\Archive\20160426 already exists
+2016-04-26 14:13:26 DEBUG Main:312 - File : D:\GitRepository\AddOfferID\INPUT\Ready\input_add.txt is moved to the archive directory 
+2016-04-26 14:15:12 DEBUG Main:93 - Done Processing file : input_add.txt
+2016-04-26 14:15:19 DEBUG Main:112 - Execution is terminating after wait for : 5
+2016-04-26 14:15:19 DEBUG Main:113 - Execution ended at : 2016-04-26 14:15:19

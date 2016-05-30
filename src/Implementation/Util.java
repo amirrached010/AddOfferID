@@ -103,12 +103,12 @@ public class Util {
         String logFileName;
         if(Globals.IS_OSWIN){
             myDirectoryPath = Globals.INSTANT_LOG_PATH;
-            logFileName =Globals.ARCHIVE_LOG_DIRECTORY+sdf2.format(currentDate)+"\\IN_SMSTool_AccumulativeLog_"+sdf1.format(currentDate)+".log";
+            logFileName =Globals.ARCHIVE_LOG_DIRECTORY+sdf2.format(currentDate)+"\\AddOfferID_AccumulativeLog_"+sdf1.format(currentDate)+".log";
         }
         else
         {
             myDirectoryPath = Globals.INSTANT_LOG_PATH;
-            logFileName =Globals.ARCHIVE_LOG_DIRECTORY+sdf2.format(currentDate)+"/IN_SMSTool_AccumulativeLog_"+sdf1.format(currentDate)+".log";
+            logFileName =Globals.ARCHIVE_LOG_DIRECTORY+sdf2.format(currentDate)+"/AddOfferID_AccumulativeLog_"+sdf1.format(currentDate)+".log";
         }
         
         File dir = new File(myDirectoryPath);
@@ -124,6 +124,7 @@ public class Util {
                     String childContent = Util.readFromFile(child);
                     if(childContent.contains("--------")){
                         all.append(childContent);
+                        logger.debug("File "+ child.getName() + " got accumulated and archived in the file : "+ logFileName);
                         child.delete();
                         all.append((System.lineSeparator()));
                         Util.WriteHourlyLog(all, logFileName);
@@ -210,9 +211,7 @@ public class Util {
                 String fileName ="";
                 try {
                     
-                    fileName = directoryListing[i].getName().substring(12, 16)+
-                        directoryListing[i].getName().substring(16, 18)+
-                        directoryListing[i].getName().substring(18, 20);
+                    fileName = dateString;
                 
                 }catch(Exception e){
                     logger.error("The fileName construction of the Watch Dog Log is in correct");

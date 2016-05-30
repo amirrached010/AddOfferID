@@ -1,0 +1,12 @@
+2016-04-26 13:31:30 DEBUG Main:52 - Starting log file for WatchDirectory Tool - 2016-04-26 13:31:30
+2016-04-26 13:31:30 DEBUG Main:156 - Resource File Path : D:\GitRepository\AddOfferID\Resources\config.properties
+2016-04-26 13:31:30 DEBUG Main:50 - Connect Revamp's Input Folder : D:\GitRepository\AddOfferID\INPUT/Ready/
+2016-04-26 13:31:30 DEBUG Main:66 - Number of files in the Watched folder is : 1
+2016-04-26 13:31:30 ERROR Main:88 - Failed to create directory D:\GitRepository\AddOfferID\ArchiveLog\20160426
+2016-04-26 13:31:30 DEBUG Main:83 - File being processed : input_add.txt
+2016-04-26 13:31:30 DEBUG Main:261 - Scanner is closing for file : input_add.txt
+2016-04-26 13:31:30 DEBUG Main:285 - Directory D:\GitRepository\AddOfferID\Archive\20160426 already exists
+2016-04-26 13:31:30 DEBUG Main:312 - File : D:\GitRepository\AddOfferID\INPUT\Ready\input_add.txt is moved to the archive directory 
+2016-04-26 13:31:31 DEBUG Main:93 - Done Processing file : input_add.txt
+2016-04-26 13:31:38 DEBUG Main:112 - Execution is terminating after wait for : 5
+2016-04-26 13:31:38 DEBUG Main:113 - Execution ended at : 2016-04-26 13:31:38

@@ -1,0 +1,13 @@
+2016-04-26 13:52:52 DEBUG Main:52 - Starting log file for WatchDirectory Tool - 2016-04-26 13:52:52
+2016-04-26 13:52:52 DEBUG Main:156 - Resource File Path : D:\GitRepository\AddOfferID\Resources\config.properties
+2016-04-26 13:52:52 DEBUG Main:50 - Connect Revamp's Input Folder : D:\GitRepository\AddOfferID\INPUT/Ready/
+2016-04-26 13:52:52 DEBUG Main:66 - Number of files in the Watched folder is : 1
+2016-04-26 13:52:52 ERROR Main:88 - Failed to create directory D:\GitRepository\AddOfferID\ArchiveLog\20160426
+2016-04-26 13:52:52 ERROR Main:186 - WriteHourlyLog : FileNotFoundException :java.io.FileNotFoundException: D:\GitRepository\AddOfferID\ArchiveLog\20160426\IN_SMSTool_AccumulativeLog_2016042613.log (The system cannot find the path specified)
+2016-04-26 13:52:52 DEBUG Main:83 - File being processed : input_delete.txt
+2016-04-26 13:52:53 DEBUG Main:261 - Scanner is closing for file : input_delete.txt
+2016-04-26 13:52:53 DEBUG Main:285 - Directory D:\GitRepository\AddOfferID\Archive\20160426 already exists
+2016-04-26 13:52:53 DEBUG Main:312 - File : D:\GitRepository\AddOfferID\INPUT\Ready\input_delete.txt is moved to the archive directory 
+2016-04-26 13:52:54 DEBUG Main:93 - Done Processing file : input_delete.txt
+2016-04-26 13:53:01 DEBUG Main:112 - Execution is terminating after wait for : 5
+2016-04-26 13:53:01 DEBUG Main:113 - Execution ended at : 2016-04-26 13:53:01

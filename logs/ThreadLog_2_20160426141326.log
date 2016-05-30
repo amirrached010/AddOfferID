@@ -1,0 +1,100 @@
+2016-04-26 14:13:26 DEBUG :386 - Log appended : logs/ThreadLog_2_20160426141326
+2016-04-26 14:13:26 DEBUG :70 - Thread is Using Air 3 whose URL is : http://10.78.49.23:10011/Air
+2016-04-26 14:13:26 DEBUG :75 - Starting the run method for Thread : logs/ThreadLog_2_20160426141326
+2016-04-26 14:13:26 DEBUG :79 - Handling the MSISDN : 1100926990
+2016-04-26 14:13:26 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:13:47 ERROR :136 - Exception in sendRequest 
+2016-04-26 14:13:47 ERROR :137 - java.net.ConnectException: Connection timed out: connect
+2016-04-26 14:13:47 ERROR :86 - The request for the current UCIP Request :  <?xml version="1.0"?>
+<methodCall>
+<methodName>UpdateOffer</methodName>
+<params><param><value><struct>
+<member><name>originNodeType</name><value><string>EXT</string></value></member>
+<member><name>originHostName</name><value><string>TestClient</string></value></member>
+<member><name>originTransactionID</name><value><string>00000001</string></value></member>
+<member><name>originTimeStamp</name><value><dateTime.iso8601>20160426T02:13:26+0200</dateTime.iso8601></value></member>
+<member><name>subscriberNumberNAI</name><value><int>2</int></value></member>
+<member><name>subscriberNumber</name><value><string>$msisdn</string></value></member>
+<member><name>offerID</name><value><int>18624</int></value></member>
+</struct></value></param></params>
+</methodCall>
+
+2016-04-26 14:13:47 ERROR :87 - The response for the current UCIP Request : 
+2016-04-26 14:13:47 DEBUG :79 - Handling the MSISDN : 1100926991
+2016-04-26 14:13:47 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:14:08 ERROR :136 - Exception in sendRequest 
+2016-04-26 14:14:08 ERROR :137 - java.net.ConnectException: Connection timed out: connect
+2016-04-26 14:14:08 ERROR :86 - The request for the current UCIP Request :  <?xml version="1.0"?>
+<methodCall>
+<methodName>UpdateOffer</methodName>
+<params><param><value><struct>
+<member><name>originNodeType</name><value><string>EXT</string></value></member>
+<member><name>originHostName</name><value><string>TestClient</string></value></member>
+<member><name>originTransactionID</name><value><string>00000001</string></value></member>
+<member><name>originTimeStamp</name><value><dateTime.iso8601>20160426T02:13:47+0200</dateTime.iso8601></value></member>
+<member><name>subscriberNumberNAI</name><value><int>2</int></value></member>
+<member><name>subscriberNumber</name><value><string>$msisdn</string></value></member>
+<member><name>offerID</name><value><int>18624</int></value></member>
+</struct></value></param></params>
+</methodCall>
+
+2016-04-26 14:14:08 ERROR :87 - The response for the current UCIP Request : 
+2016-04-26 14:14:08 DEBUG :79 - Handling the MSISDN : 1100926992
+2016-04-26 14:14:08 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:14:29 ERROR :136 - Exception in sendRequest 
+2016-04-26 14:14:29 ERROR :137 - java.net.ConnectException: Connection timed out: connect
+2016-04-26 14:14:29 ERROR :86 - The request for the current UCIP Request :  <?xml version="1.0"?>
+<methodCall>
+<methodName>UpdateOffer</methodName>
+<params><param><value><struct>
+<member><name>originNodeType</name><value><string>EXT</string></value></member>
+<member><name>originHostName</name><value><string>TestClient</string></value></member>
+<member><name>originTransactionID</name><value><string>00000001</string></value></member>
+<member><name>originTimeStamp</name><value><dateTime.iso8601>20160426T02:14:08+0200</dateTime.iso8601></value></member>
+<member><name>subscriberNumberNAI</name><value><int>2</int></value></member>
+<member><name>subscriberNumber</name><value><string>$msisdn</string></value></member>
+<member><name>offerID</name><value><int>18624</int></value></member>
+</struct></value></param></params>
+</methodCall>
+
+2016-04-26 14:14:29 ERROR :87 - The response for the current UCIP Request : 
+2016-04-26 14:14:29 DEBUG :79 - Handling the MSISDN : 1100926993
+2016-04-26 14:14:29 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:14:50 ERROR :136 - Exception in sendRequest 
+2016-04-26 14:14:50 ERROR :137 - java.net.ConnectException: Connection timed out: connect
+2016-04-26 14:14:50 ERROR :86 - The request for the current UCIP Request :  <?xml version="1.0"?>
+<methodCall>
+<methodName>UpdateOffer</methodName>
+<params><param><value><struct>
+<member><name>originNodeType</name><value><string>EXT</string></value></member>
+<member><name>originHostName</name><value><string>TestClient</string></value></member>
+<member><name>originTransactionID</name><value><string>00000001</string></value></member>
+<member><name>originTimeStamp</name><value><dateTime.iso8601>20160426T02:14:29+0200</dateTime.iso8601></value></member>
+<member><name>subscriberNumberNAI</name><value><int>2</int></value></member>
+<member><name>subscriberNumber</name><value><string>$msisdn</string></value></member>
+<member><name>offerID</name><value><int>18624</int></value></member>
+</struct></value></param></params>
+</methodCall>
+
+2016-04-26 14:14:50 ERROR :87 - The response for the current UCIP Request : 
+2016-04-26 14:14:50 DEBUG :79 - Handling the MSISDN : 1100926994
+2016-04-26 14:14:50 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:11 ERROR :136 - Exception in sendRequest 
+2016-04-26 14:15:11 ERROR :137 - java.net.ConnectException: Connection timed out: connect
+2016-04-26 14:15:11 ERROR :86 - The request for the current UCIP Request :  <?xml version="1.0"?>
+<methodCall>
+<methodName>UpdateOffer</methodName>
+<params><param><value><struct>
+<member><name>originNodeType</name><value><string>EXT</string></value></member>
+<member><name>originHostName</name><value><string>TestClient</string></value></member>
+<member><name>originTransactionID</name><value><string>00000001</string></value></member>
+<member><name>originTimeStamp</name><value><dateTime.iso8601>20160426T02:14:50+0200</dateTime.iso8601></value></member>
+<member><name>subscriberNumberNAI</name><value><int>2</int></value></member>
+<member><name>subscriberNumber</name><value><string>$msisdn</string></value></member>
+<member><name>offerID</name><value><int>18624</int></value></member>
+</struct></value></param></params>
+</methodCall>
+
+2016-04-26 14:15:11 ERROR :87 - The response for the current UCIP Request : 
+2016-04-26 14:15:11 DEBUG :446 - Thread Stopped for dial : [1100926990,UpdateOffer,18624, 1100926991,UpdateOffer,18624, 1100926992,UpdateOffer,18624, 1100926993,UpdateOffer,18624, 1100926994,UpdateOffer,18624]
+2016-04-26 14:15:11 DEBUG :447 - ------------------------------------------------------------------------------------------------

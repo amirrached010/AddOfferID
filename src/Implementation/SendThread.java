@@ -18,6 +18,7 @@ import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -51,8 +52,8 @@ public class SendThread implements Runnable {
     String serverUrl;
     ArrayList<String> inputList;
     String password;
-    String offerId;
     String msisdn;
+    Globals.UCIPRequest currentRequest;
     Logger logger;
     String appenderName;
     Properties properties;
@@ -74,16 +75,23 @@ public class SendThread implements Runnable {
         
         logger.debug("Starting the run method for Thread : "+appenderName);
         for(int i=0; i<inputList.size(); i++){
-            this.msisdn = inputList.get(i).split(",")[0];
-            this.offerId=inputList.get(i).split(",")[1];
-            logger.debug("Handling the MSISDN : " + this.msisdn);
             HashMap<String,String> ucip_inputs1 = new HashMap<String,String>();
-            ucip_inputs1.put("$offerid",offerId);
-            String request1 = formatRequestV1(Globals.UCIPRequest.UpdateOffer,ucip_inputs1);
+            parseInputs(ucip_inputs1,inputList.get(i));
+            logger.debug("Handling the MSISDN : " + this.msisdn);
+            logger.debug("current UCIP Request : "+ currentRequest.name());
+            
+            String request1 = formatRequestV1(currentRequest,ucip_inputs1); 
             String response1 = sendRequest(request1);
-            logger.debug("Response1 Update MSISDN : "+this.msisdn+" with offerId "+this.offerId +" : "+parseResponse(response1));
+            String parsedResponse = parseResponse(response1);
+            if(!parsedResponse.trim().equals("0") && !parsedResponse.trim().equals("190") ){
+                logger.error("The request for the current UCIP Request :  "+ request1);
+                logger.error("The response for the current UCIP Request : "+ response1);
+            } else{
+                logger.debug("Request sent successfully with Response Code : "+ parsedResponse);
+            }
         
         }
+        
         stopThread();
 }
 
@@ -99,10 +107,11 @@ public class SendThread implements Runnable {
         String response = "";
         //tring password = "Z3NkYzpnc2Rj";
         // String password = "YWlydXNlcjpsYXVuY2gwNQ==";
-
+        URLConnection urlConnection= null;
+        HttpURLConnection httpConnection = null;
         try {
             //   System.out.println("in 1");
-            URLConnection urlConnection = getConnection();
+            urlConnection = getConnection();
             urlConnection.setDoOutput(true);
             urlConnection.setUseCaches(false);
             urlConnection.setRequestProperty("Method", "POST");
@@ -153,6 +162,11 @@ public class SendThread implements Runnable {
                     logger.error("Exception in sendRequest ");
                     logger.error(ioException);
                 }
+            }
+            if (urlConnection != null) {
+                 httpConnection = (HttpURLConnection) urlConnection;
+                 httpConnection.disconnect();
+                 logger.debug("The connection to "+serverUrl+" is closed");
             }
         }
         //   System.out.println("in 5");
@@ -221,16 +235,13 @@ public class SendThread implements Runnable {
         updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$originTimeStamp",sdf.format(new Date()));
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, 6);
-        java.util.Date dt = cal.getTime();
-        String currentDate = sdf.format(new Date());
         switch(ucipRequest){
             case UpdateOffer: 
                 updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$offerID", inputs.get("$offerid"));
                 break;
             case UpdateOfferWithExpiry: 
                 updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$offerID", inputs.get("$offerid"));
-                currentDate = sdf.format(dt);
-                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$expiryDate", currentDate);
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$expiryDate", inputs.get("$expiryDate"));
                 break;
             case AddPam: 
                 updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$PAMServiceID", inputs.get("$PAMServiceID"));
@@ -247,6 +258,12 @@ public class SendThread implements Runnable {
                 updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$AccumulatorID_3", properties.getProperty("AccumulatorID_3"));
                 updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$AccumulatorID_4", properties.getProperty("AccumulatorID_4"));
                 updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$AccumulatorID_5", properties.getProperty("AccumulatorID_5"));
+                break;
+            case DeleteOffer: 
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$offerID", inputs.get("$offerid"));
+                break;
+            case ChangeSC: 
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$SC", inputs.get("$SC"));
                 break;
         };
         return updateBalanceAndDateRequest;        
@@ -437,9 +454,46 @@ public class SendThread implements Runnable {
     }
  
     public void stopThread(){
-        logger.debug("Thread Stopped for dial : "+ inputList);
+        logger.debug("Thread Stopped ");
         logger.debug("------------------------------------------------------------------------------------------------");
         logger.getAppender(appenderName).close();
         //LogManager.shutdown();
+    }
+    
+    public void parseInputs(HashMap<String,String> ucip_inputs1,String s){
+        this.msisdn = s.split(",")[0];
+        if(s.split(",")[1].equals(Globals.UCIPRequest.AddPam.toString())){
+            this.currentRequest = Globals.UCIPRequest.AddPam;
+            ucip_inputs1.put("$PAMServiceID",s.split(",")[2]);
+            ucip_inputs1.put("$PAMCLASSID",s.split(",")[3]);
+            ucip_inputs1.put("$PAMSCHEDULEID",s.split(",")[4]);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.UpdateOffer.toString())){
+            this.currentRequest = Globals.UCIPRequest.UpdateOffer;
+            ucip_inputs1.put("$offerid",s.split(",")[2]);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.GetAccountDetails.toString()))
+            this.currentRequest = Globals.UCIPRequest.GetAccountDetails;
+        if(s.split(",")[1].equals(Globals.UCIPRequest.ResetFiveAccumulator.toString()))
+            this.currentRequest = Globals.UCIPRequest.ResetFiveAccumulator;
+        if(s.split(",")[1].equals(Globals.UCIPRequest.GetOffers.toString()))
+            this.currentRequest = Globals.UCIPRequest.GetOffers;
+        if(s.split(",")[1].equals(Globals.UCIPRequest.UpdateOfferWithExpiry.toString())){
+            this.currentRequest = Globals.UCIPRequest.UpdateOfferWithExpiry;
+            ucip_inputs1.put("$offerid",s.split(",")[2]);
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_MONTH,Integer.parseInt(s.split(",")[3]));
+            java.util.Date dt = cal.getTime();
+            String currentDate = sdf.format(dt);
+            ucip_inputs1.put("$expiryDate",currentDate);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.DeleteOffer.toString())){
+            this.currentRequest = Globals.UCIPRequest.DeleteOffer;
+            ucip_inputs1.put("$offerid",s.split(",")[2]);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.ChangeSC.toString())){
+            this.currentRequest = Globals.UCIPRequest.ChangeSC;
+            ucip_inputs1.put("$SC",s.split(",")[2]);
+        }
     }
 }

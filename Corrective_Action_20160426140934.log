@@ -1,0 +1,5 @@
+2016-04-26 14:09:34 DEBUG Main:52 - Starting log file for WatchDirectory Tool - 2016-04-26 14:09:34
+2016-04-26 14:09:34 DEBUG Main:156 - Resource File Path : D:\GitRepository\AddOfferID\Resources\config.properties
+2016-04-26 14:09:34 DEBUG Main:50 - Connect Revamp's Input Folder : D:\GitRepository\AddOfferID\INPUT/Ready/
+2016-04-26 14:09:39 DEBUG Main:112 - Execution is terminating after wait for : 5
+2016-04-26 14:09:39 DEBUG Main:113 - Execution ended at : 2016-04-26 14:09:39

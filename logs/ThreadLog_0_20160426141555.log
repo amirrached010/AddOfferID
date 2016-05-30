@@ -1,0 +1,34 @@
+2016-04-26 14:15:55 DEBUG :386 - Log appended : logs/ThreadLog_0_20160426141555
+2016-04-26 14:15:55 DEBUG :70 - Thread is Using Air 1 whose URL is : http://10.78.1.101:10011/Air
+2016-04-26 14:15:55 DEBUG :75 - Starting the run method for Thread : logs/ThreadLog_0_20160426141555
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926980
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926981
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926982
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926983
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926984
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 ERROR :86 - The request for the current UCIP Request :  <?xml version="1.0"?>
+<methodCall>
+<methodName>UpdateOffer</methodName>
+<params><param><value><struct>
+<member><name>originNodeType</name><value><string>EXT</string></value></member>
+<member><name>originHostName</name><value><string>TestClient</string></value></member>
+<member><name>originTransactionID</name><value><string>00000001</string></value></member>
+<member><name>originTimeStamp</name><value><dateTime.iso8601>20160426T02:15:55+0200</dateTime.iso8601></value></member>
+<member><name>subscriberNumberNAI</name><value><int>2</int></value></member>
+<member><name>subscriberNumber</name><value><string>$msisdn</string></value></member>
+<member><name>offerID</name><value><int>18624</int></value></member>
+</struct></value></param></params>
+</methodCall>
+
+2016-04-26 14:15:55 ERROR :87 - The response for the current UCIP Request : <?xml version="1.0" encoding="UTF-8"?><methodResponse><params><param><value><struct><member><name>availableServerCapabilities</name><value><array><data><value><i4>8462852</i4></value></data></array></value></member><member><name>negotiatedCapabilities</name><value><array><data><value><i4>0</i4></value></data></array></value></member><member><name>originTransactionID</name><value><string>00000001</string></value></member><member><name>responseCode</name><value><i4>102</i4></value></member></struct></value></param></params></methodResponse>
+2016-04-26 14:15:55 DEBUG :446 - Thread Stopped for dial : [1100926980,UpdateOffer,18784, 1100926981,UpdateOffer,18784, 1100926982,UpdateOffer,18784, 1100926983,UpdateOffer,18784, 1100926984,UpdateOffer,18624]
+2016-04-26 14:15:55 DEBUG :447 - ------------------------------------------------------------------------------------------------

@@ -1,0 +1,20 @@
+2016-04-26 14:15:55 DEBUG :386 - Log appended : logs/ThreadLog_3_20160426141555
+2016-04-26 14:15:55 DEBUG :70 - Thread is Using Air 4 whose URL is : http://10.78.49.24:10011/Air
+2016-04-26 14:15:55 DEBUG :75 - Starting the run method for Thread : logs/ThreadLog_3_20160426141555
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926995
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926996
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926997
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926998
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :79 - Handling the MSISDN : 1100926999
+2016-04-26 14:15:55 DEBUG :80 - current UCIP Request : UpdateOffer
+2016-04-26 14:15:55 DEBUG :89 - Request sent successfully with Response Code : 0
+2016-04-26 14:15:55 DEBUG :446 - Thread Stopped for dial : [1100926995,UpdateOffer,18624, 1100926996,UpdateOffer,18624, 1100926997,UpdateOffer,18624, 1100926998,UpdateOffer,18624, 1100926999,UpdateOffer,18624]
+2016-04-26 14:15:55 DEBUG :447 - ------------------------------------------------------------------------------------------------
