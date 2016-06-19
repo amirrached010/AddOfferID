@@ -5,6 +5,7 @@
 package Implementation;
 
 
+import com.etisalatmisr.smpp.SMSSender;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,7 +32,7 @@ public class Main {
     
     static Logger logger;
     static Properties properties;
-    
+    static SMSSender smscSender;
     static int counter;
     
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -54,6 +55,7 @@ public class Main {
         
         File file = new File(Globals.WATCHED_DIRECTORY);
         int waitInactive = 0;
+        initiateSMSCConfigurations();
         while(true){
             try{
                 Util.checkLogCapacity(logger);
@@ -137,7 +139,7 @@ public class Main {
             ArrayList<ArrayList<String>> twoDimensionalArrayOfStrings = BreakFile(toFile);
             
             for(int i=0; i<twoDimensionalArrayOfStrings.size();i++){
-                SendThread a = new SendThread(twoDimensionalArrayOfStrings.get(i),properties,i);
+                SendThread a = new SendThread(twoDimensionalArrayOfStrings.get(i),properties,smscSender,i);
                 new Thread(a).start();
             }
             archiveFile(currentFile);
@@ -325,5 +327,35 @@ public class Main {
             logger.error(e);
         }
      
+    }
+    
+    public static void initiateSMSCConfigurations(){
+        Properties smsSenderProperties = new Properties();
+        FileInputStream fileInput;
+        File smsPropertiesFile = new File(System.getProperty("user.dir")+"/Resources/smpp.cfg");
+        logger.debug("the SMSC config file : "+ smsPropertiesFile.getAbsolutePath());
+        try {
+            fileInput = new FileInputStream(smsPropertiesFile);
+        } catch (FileNotFoundException ex) {
+            logger.error("SMSC config file is not found");
+            return;
+        }
+        try {
+            smsSenderProperties.load(fileInput);
+        } catch (IOException ex) {
+            logger.error("Error in loading the SMSC config ");
+            return;
+        }
+
+            
+        
+        try {
+            smscSender = new SMSSender(smsSenderProperties, 1);
+            logger.debug("SMSSender initialized successfully");
+        } catch (Exception ex) {
+            logger.error("Error in initializing the SMSSender Object");
+            logger.error(ex);
+        }
+        
     }
 }

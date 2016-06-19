@@ -5,6 +5,7 @@
 package Implementation;
 
 
+import com.etisalatmisr.smpp.SMSSender;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -58,9 +59,10 @@ public class SendThread implements Runnable {
     String appenderName;
     Properties properties;
     int counter;
+    SMSSender smscSender;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd'T'hh:mm:ss+0200");
     public SendThread( ArrayList<String> inputList, 
-            Properties properties,int counter) {
+            Properties properties,SMSSender smscSender,int counter) {
         // this.request = request;
         this.serverUrl = properties.getProperty("AIR_"+((counter%(Integer.parseInt(properties.getProperty("NumberOfAirs"))))+1)+"_URL");
         this.inputList = inputList;
@@ -69,6 +71,7 @@ public class SendThread implements Runnable {
         this.counter= counter;
         intializeLogger();
         logger.debug("Thread is Using Air "+((counter%(Integer.parseInt(properties.getProperty("NumberOfAirs"))))+1)+" whose URL is : "+ serverUrl);
+        this.smscSender = smscSender;
     }
 
     public void run() {
@@ -78,16 +81,22 @@ public class SendThread implements Runnable {
             HashMap<String,String> ucip_inputs1 = new HashMap<String,String>();
             parseInputs(ucip_inputs1,inputList.get(i));
             logger.debug("Handling the MSISDN : " + this.msisdn);
-            logger.debug("current UCIP Request : "+ currentRequest.name());
-            
-            String request1 = formatRequestV1(currentRequest,ucip_inputs1); 
-            String response1 = sendRequest(request1);
-            String parsedResponse = parseResponse(response1);
-            if(!parsedResponse.trim().equals("0") && !parsedResponse.trim().equals("190") ){
-                logger.error("The request for the current UCIP Request :  "+ request1);
-                logger.error("The response for the current UCIP Request : "+ response1);
-            } else{
-                logger.debug("Request sent successfully with Response Code : "+ parsedResponse);
+            logger.debug("current  Request : "+ currentRequest.name());
+            if(!currentRequest.name().equals("SendSMS")){
+                
+                String request1 = formatRequestV1(currentRequest,ucip_inputs1); 
+                String response1 = sendRequest(request1);
+                String parsedResponse = parseResponse(response1);
+                if(!parsedResponse.trim().equals("0") && !parsedResponse.trim().equals("190") ){
+                    logger.error("The request for the current UCIP Request :  "+ request1);
+                    logger.error("The response for the current UCIP Request : "+ response1);
+                } else{
+                    logger.debug("Request sent successfully with Response Code : "+ parsedResponse);
+                }
+            }
+            else {
+                
+                sendSMS(properties.getProperty("SMS_Sender"),msisdn,properties.getProperty("SMS_Content"),i);
             }
         
         }
@@ -265,6 +274,18 @@ public class SendThread implements Runnable {
             case ChangeSC: 
                 updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$SC", inputs.get("$SC"));
                 break;
+            case AddSob: 
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$sobID", inputs.get("$sobID"));
+                break;
+            case AddTwoSob: 
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$sobID_1", inputs.get("$sobID_1"));
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$sobID_2", inputs.get("$sobID_2"));
+                break;
+            case AddThreeSob: 
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$sobID_1", inputs.get("$sobID_1"));
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$sobID_2", inputs.get("$sobID_2"));
+                updateBalanceAndDateRequest = updateBalanceAndDateRequest.replace("$sobID_3", inputs.get("$sobID_3"));
+                break;
         };
         return updateBalanceAndDateRequest;        
     }
@@ -397,62 +418,35 @@ public class SendThread implements Runnable {
         logger.debug("Log appended : " + fileName);
         
     }
-    
-    public  void sendSMS(String toString,int lineCounter) {
-        Writer writer = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String currentFileName ="";
-        File resultFile = null;
-        File newFile  = null;
-        if(Util.getOSType() == Globals.OS_UNIX){
-            currentFileName = Globals.SMS_PREPARATION_DIRECTORY+"AirTool_"+sdf.format(new Date())+"_L"+lineCounter+"_V"+this.inputList+".txt";
-            resultFile = new File(currentFileName);
-            newFile = new File(Globals.SMS_DIRECTORY+resultFile.getName());
-                    
-        }
-        else{
-            currentFileName = Globals.SMS_PREPARATION_DIRECTORY+"AirTool_"+sdf.format(new Date())+"_L"+lineCounter+"_V"+this.inputList+".txt";
-            resultFile = new File(currentFileName);
-            newFile = new File(Globals.SMS_DIRECTORY+resultFile.getName());
-        }
-        
-        
-        if(!resultFile.exists())
-            try {
-                resultFile.createNewFile();
-        } catch (IOException ex) {
-           logger.error("Cannot create the SMS file in the SMS Preparation Directory: "+ currentFileName);
-        }
-        try {
-            FileWriter fw = new FileWriter(resultFile,true);
-            //BufferedWriter writer give better performance
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.append(toString);
-            bw.close();
-            // Send the file to the SMS tool
-            //logger.info("Deleting moved file : "+ newFile.delete());
-            try{
-            Files.move(Paths.get(resultFile.getAbsolutePath()), Paths.get(newFile.getAbsolutePath()),StandardCopyOption.REPLACE_EXISTING);
-            logger.info("File "+ newFile.getAbsolutePath()+" is moved to the SMS Directory");
-            }catch(Exception e){
-                logger.error("Failed to move File "+ resultFile.getAbsolutePath()+" to the SMS Directory : " + Globals.SMS_DIRECTORY + " under name : " + newFile.getName());
-                logger.error("Exception : "+ e);
-            }    
-//            if(resultFile.renameTo(newFile)){
-//              logger.info("File "+ newFile.getAbsolutePath()+" is moved to the SMS Directory");
-//            }
-//            else {
-//               logger.error("Failed to move File "+ resultFile.getAbsolutePath()+" to the SMS Directory : " + Globals.SMS_DIRECTORY + " under name : " + newFile.getName());
-//            }
-        } catch (UnsupportedEncodingException ex) {
-            logger.error("Error in writing in file : "+ currentFileName);
-        } catch (FileNotFoundException ex) {
-            logger.error("File not found : "+ currentFileName);
-        } catch (IOException ex) {
-            logger.error("IO Exception: "+ currentFileName);;
-        }
+     
+    /**
+     * Sends the SMS directly to the SMSC using the object smscSender and the method sendMessage
+     * in the smpp.jar library.
+     * @param sender //The sender of the SMS.
+     * @param dial  // The dial receiving the SMS.
+     * @param toString // The SMS Script.
+     * @param lineCounter //The line number of the CDR requesting sending the passed SMS.
+     */
+    public  void sendSMS(String sender,String dial,String toString,int lineCounter) {
+
+        // For Deployment
+          try{
+            boolean result = smscSender.sendMessage(sender, "0"+dial, toString,2);
+            logger.debug("Successfully Sending SMS");
+            if(result){
+               logger.debug(toString);
+               logger.debug("Successfully Sent SMS to the dial "+dial); 
+            } else 
+            {
+                logger.debug(toString);
+                logger.debug("Failed to send SMS to the dial  "+dial); 
+            }
+        }catch(Exception e){
+            logger.error("Error : Failed to send SMS to the dial  "+dial);
+            logger.error(e);
+        }  
     }
- 
+    
     public void stopThread(){
         logger.debug("Thread Stopped ");
         logger.debug("------------------------------------------------------------------------------------------------");
@@ -461,6 +455,7 @@ public class SendThread implements Runnable {
     }
     
     public void parseInputs(HashMap<String,String> ucip_inputs1,String s){
+        
         this.msisdn = s.split(",")[0];
         if(s.split(",")[1].equals(Globals.UCIPRequest.AddPam.toString())){
             this.currentRequest = Globals.UCIPRequest.AddPam;
@@ -494,6 +489,26 @@ public class SendThread implements Runnable {
         if(s.split(",")[1].equals(Globals.UCIPRequest.ChangeSC.toString())){
             this.currentRequest = Globals.UCIPRequest.ChangeSC;
             ucip_inputs1.put("$SC",s.split(",")[2]);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.AddSob.toString())){
+            this.currentRequest = Globals.UCIPRequest.AddSob;
+            System.out.println("SOB : "+s.split(",")[2]);
+            ucip_inputs1.put("$sobID",s.split(",")[2]);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.AddTwoSob.toString())){
+            this.currentRequest = Globals.UCIPRequest.AddTwoSob;
+            ucip_inputs1.put("$sobID_1",s.split(",")[2]);
+            ucip_inputs1.put("$sobID_2",s.split(",")[3]);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.AddThreeSob.toString())){
+            this.currentRequest = Globals.UCIPRequest.AddThreeSob;
+            ucip_inputs1.put("$sobID_1",s.split(",")[2]);
+            ucip_inputs1.put("$sobID_2",s.split(",")[3]);
+            ucip_inputs1.put("$sobID_3",s.split(",")[4]);
+        }
+        if(s.split(",")[1].equals(Globals.UCIPRequest.SendSMS.toString())){
+            this.currentRequest = Globals.UCIPRequest.SendSMS;
+            
         }
     }
 }

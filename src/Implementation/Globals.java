@@ -36,6 +36,10 @@ public class Globals {
         RunPam,
         UpdateOfferWithExpiry,
         DeleteOffer,
-        ChangeSC
+        ChangeSC,
+        AddSob,
+        AddTwoSob,
+        AddThreeSob,
+        SendSMS
     }
 }
